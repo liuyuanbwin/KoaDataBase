@@ -1,9 +1,9 @@
 const production = {
 
-    //·þÎñÆ÷¶Ë¿Ú
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¿ï¿½
     SERVER_PORT:3000,
 
-    //REDISÅäÖÃ
+    //REDISï¿½ï¿½ï¿½ï¿½
     REDIS:{
         host:'localhost',
         port:6379,
@@ -11,7 +11,7 @@ const production = {
         maxAge: 3600000
     },
 
-    //MYSQLÊý¾Ý¿âÅäÖÃ
+    //MYSQLï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½
     MYSQL:{
         host:"localhost",
         user:"root",
@@ -24,13 +24,13 @@ const production = {
     }
 }
 
-//¿ª·¢ÅäÖÃ
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 const development = {
 
-    //·þÎñÆ÷¶Ë¿Ú
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¿ï¿½
     SERVER_PORT : 3333,
 
-    //REDISÅäÖÃ
+    //REDISï¿½ï¿½ï¿½ï¿½
     REDIS: {
         host: 'localhost',
         port: 6379,
@@ -38,7 +38,7 @@ const development = {
         maxAge: 3600000
     },
 
-    //MYSQLÊý¾Ý¿âÅäÖÃ
+    //MYSQLï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½
     MYSQL:{
         host: "localhost",
         user: "root",
@@ -51,6 +51,34 @@ const development = {
     }
 }
 
-const config = development
+
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+const x220 = {
+
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¿ï¿½
+    SERVER_PORT : 3333,
+
+    //REDISï¿½ï¿½ï¿½ï¿½
+    REDIS: {
+        host: 'localhost',
+        port: 6379,
+        password: "abcd",
+        maxAge: 3600000
+    },
+
+    //MYSQLï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½
+    MYSQL:{
+        host: "localhost",
+        user: "root",
+        password: "",
+        port:"3306",
+        database:"todolist",
+        supportBigNumbers:true,
+        multipleStatements:true,
+        timezone: 'utc'
+    }
+}
+
+const config = x220
 
 module.exports = config;
