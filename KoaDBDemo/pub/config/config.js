@@ -28,7 +28,7 @@ const production = {
 const development = {
 
     //·þÎñÆ÷¶Ë¿Ú
-    SERVER_PORT : 3000,
+    SERVER_PORT : 3333,
 
     //REDISÅäÖÃ
     REDIS: {

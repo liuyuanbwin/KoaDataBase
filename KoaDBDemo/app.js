@@ -9,11 +9,15 @@ const logger = require('koa-logger')
 const config = require('./pub/config/config.js')
 const session = require('koa-session')
 const RedisStore = require('koa2-session-redis')
+var render = require('koa-ejs')
 
 const index = require('./routes/index')
 const reg = require('./routes/reg')
 const login = require('./routes/login')
 const logout = require('./routes/logout')
+const template = require('./routes/template')
+
+
 
 // error handler
 onerror(app)
@@ -22,6 +26,7 @@ onerror(app)
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
 }))
+
 app.use(json())
 app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))
@@ -39,30 +44,29 @@ app.use(async (ctx, next) => {
 })
 
 app.keys = ['Porschev'];
-const redis_conf = {
+const redis_conf = {  
   key: 'Porschev',
   maxAge: config.REDIS.maxAge,
   overwrite: true,
-  httpOnly: true,
+  httpOnly: true,  
   rolling: false,
-  sign:true,
-  store:new RedisStore({
-    host:config.REDIS.host,
-    port: config.REDIS.port,
-    password:config.REDIS.password
-  })
+  sign: true,
+  renew: false
+  // store: new RedisStore({
+  //   host: config.REDIS.host,
+  //   port: config.REDIS.port,    
+  //   password: config.REDIS.password    
+  // })
 };
 
 app.use(session(redis_conf, app));
-
-
 
 // routes
 app.use(index.routes(), index.allowedMethods())
 app.use(reg.routes(), reg.allowedMethods())
 app.use(login.routes(), login.allowedMethods())
 app.use(logout.routes(), logout.allowedMethods())
-//app.use(users.routes(), users.allowedMethods())
+app.use(template.routes(), template.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
@@ -70,7 +74,7 @@ app.on('error', (err, ctx) => {
 });
 
 app.listen(config.SERVER_PORT, () => {
-  console.log(`Starting at port ${config.SERVER_PORT}`)
+  console.log(`Starting at port ${config.SERVER_PORT}!`)
 });
 
 module.exports = app

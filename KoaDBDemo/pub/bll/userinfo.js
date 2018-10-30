@@ -4,9 +4,9 @@ const retCode = require('./../utils/retcode.js')
 const userinfo = {
 
   /**
-   * ×¢²á
-   * @param  {object} ctx   ÉÏÏÂÎÄ
-   * @return {object}       ½á¹û
+   * æ³¨å†Œ
+   * @param  {object} ctx   ä¸Šä¸‹æ–‡
+   * @return {object}       ç»“æœ
    */
   async register ( ctx ) {
     let form = ctx.request.body
@@ -21,22 +21,22 @@ const userinfo = {
         data: null
     }
     
-    //ÑéÖ¤·Ç¿Õ
+    //éªŒè¯éç©º
     if(!args.username || !args.userpass){
         result.code = retCode.ArgsError        
         return result
     }
 
-    //¸ù¾İÓÃ»§ÃûµÃµ½ÓÃ»§ÊıÁ¿
+    //æ ¹æ®ç”¨æˆ·åå¾—åˆ°ç”¨æˆ·æ•°é‡
     let userNumResult = await usermodel.getCountByUserName(args)
 
-    //ÓÃ»§ÃûÒÑ±»×¢²á
+    //ç”¨æˆ·åå·²è¢«æ³¨å†Œ
     if(userNumResult[0].UserNum > 0){
         result.code = retCode.UserExisted        
         return result
     }
 
-    //²åÈë×¢²áÊı¾İ
+    //æ’å…¥æ³¨å†Œæ•°æ®
     let userResult = await usermodel.add(args)
 
     if(userResult.insertId <= 0){
@@ -48,9 +48,9 @@ const userinfo = {
   },
 
   /**
-   * µÇÂ¼
-   * @param  {object} ctx   ÉÏÏÂÎÄ
-   * @return {object}       ½á¹û
+   * ç™»å½•
+   * @param  {object} ctx   ä¸Šä¸‹æ–‡
+   * @return {object}       ç»“æœ
    */
   async login ( ctx ) {
     let form = ctx.request.body
@@ -65,31 +65,31 @@ const userinfo = {
         data: null
     }
     
-    //ÑéÖ¤·Ç¿Õ
+    //éªŒè¯éç©º
     if(!args.username || !args.userpass){
         result.code = retCode.ArgsError        
         return result
     }
 
-    //¸ù¾İÓÃ»§ÃûµÃµ½ÓÃ»§ĞÅÏ¢
+    //æ ¹æ®ç”¨æˆ·åå¾—åˆ°ç”¨æˆ·ä¿¡æ¯
     let userResult = await usermodel.getByUserName(args)
 
-    //ÓÃ»§²»´æÔÚ
+    //ç”¨æˆ·ä¸å­˜åœ¨
     if(userResult.length == 0){
         result.code = retCode.UserNotExist        
         return result
     }
     
-    console.log(userResult)
-
-    //ÓÃ»§Ãû»òÃÜÂë´íÎó
+    //ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯
     if(userResult[0].UserName != args.username || userResult[0].UserPass != args.userpass){
         result.code = retCode.UsernameOrPasswordError        
         return result
     }
 
-    //½«ÓÃ»§ID´æÈëSessionÖĞ
-    ctx.session = {id: userResult[0].Id}
+    //å°†ç”¨æˆ·IDå­˜å…¥Sessionä¸­
+    ctx.session.id = userResult[0].Id //= {id: userResult[0].Id}
+
+    console.log('ctx.session ' + JSON.stringify(ctx.session))
 
     return result
   },

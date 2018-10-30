@@ -1,6 +1,6 @@
 const router = require('koa-router')()
 const userBll = require('./../pub/bll/userinfo.js')
-const title = '登录'
+const title = '??'
 
 router.prefix('/login')
 

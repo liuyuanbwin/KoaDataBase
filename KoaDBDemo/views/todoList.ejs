@@ -1,0 +1,15 @@
+<% include header.ejs%>
+<ul>
+    <% for (var i = 0; i < content.length;i ++){ %>
+    <li>
+        <%=content[i].content%>
+        <input type="button"
+                <%if (content[i].isDone === 1){%>
+               value="已做"
+                <%}else {%>
+               value="未做"
+                <%}%>
+        >
+    </li>
+    <%}%>
+</ul>

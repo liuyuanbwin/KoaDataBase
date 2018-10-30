@@ -1,7 +1,7 @@
 const mysqlHelper = require('./../db/mysql-helper.js')
 
 const userinfo = {
-   //增加一条数据
+
    async add (args) {
        let sql =  'INSERT INTO userinfo(UserName, UserPass) VALUE(?, ?)'
        let params = [args.username, args.userpass]
